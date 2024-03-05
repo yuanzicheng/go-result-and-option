@@ -139,12 +139,12 @@ func (r *Result[T]) ExpectErr(msg string) error {
 }
 
 // Unwrap extracts the value from the Result. Panics if the Result is Error.
-func (r *Result[T]) Unwrap() T {
+func (r *Result[T]) Unwrap() *T {
 	if r.IsErr() {
 		panic("called `Result::unwrap()` on an `Err` value")
 	}
 
-	return *r.value
+	return r.value
 }
 
 // UnwrapError extracts the error from the Result. Panics if the Result is Ok.
@@ -173,7 +173,7 @@ func (r *Result[T]) UnwrapOrElse(f func() *T) *T {
 	return r.value
 }
 
-// UnwrapOrDefault returns the contained [`Ok`] value or a default.
+// UnwrapOrDefault returns the contained [`Ok`] value or a default (nil).
 func (r *Result[T]) UnwrapOrDefault() *T {
 	if r.IsErr() {
 		return nil

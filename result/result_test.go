@@ -10,7 +10,7 @@ func TestResult(t *testing.T) {
 	}
 
 	v := r.Unwrap()
-	if v != x {
+	if *v != x {
 		t.Error("Unwrap failed")
 	}
 }
