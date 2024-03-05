@@ -140,7 +140,7 @@ func (r *Result[T]) ExpectErr(msg string) error {
 
 // Unwrap extracts the value from the Result. Panics if the Result is Error.
 func (r *Result[T]) Unwrap() T {
-	if r.value == nil {
+	if r.IsErr() {
 		panic("called `Result::unwrap()` on an `Err` value")
 	}
 
@@ -149,7 +149,7 @@ func (r *Result[T]) Unwrap() T {
 
 // UnwrapError extracts the error from the Result. Panics if the Result is Ok.
 func (r *Result[T]) UnwrapError() error {
-	if r.err == nil {
+	if r.IsOk() {
 		panic("called `Result::unwrap_err()` on an `Ok` value")
 	}
 
