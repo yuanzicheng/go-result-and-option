@@ -91,6 +91,13 @@ func (r *Result[T]) IsOkAnd(f func(*T) bool) bool {
 	return f(r.value)
 }
 
+// IsOkAndNotNil returns `true` if the result is [`Ok`] and the value inside of it is not nil.
+func (r *Result[T]) IsOkAndNotNil(f func(*T) bool) bool {
+	return r.IsOkAnd(func(t *T) bool {
+		return t != nil
+	})
+}
+
 // IsErr returns `true` if the result is [`Err`].
 func (r *Result[T]) IsErr() bool {
 	return r.err != nil
